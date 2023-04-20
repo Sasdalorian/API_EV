@@ -1,32 +1,41 @@
 import express from "express";
-import pg from "pg";
-import { sequelize } from "./database/data.js";
+import { Usuario } from "./database/models/Usuario.js";
+import { Voluntariados } from "./database/models/Voluntariados.js";
+import { Areas } from "./database/models/Areas.js";
 
-const app = express()
-const { Pool } = pg;
+const app = express();
 
 app.use(express.json());
-
-const pool = new Pool({
-    host: "localhost",
-    user: "postgres",
-    database: "proyectoind",
-    password: "1234",
-    port: 5432
-});
 
 app.listen(4000, (req,res) => {
     console.log('La DB se ha conectado al puerto 4000');
 });
 
+// MOSTRAR VOLUNTARIADOS
 app.get("/api/v1/voluntariados", async (req, res) => {
-    const resultado = await pool.query(`SELECT * FROM voluntariados ORDER BY id`);
-    res.json(resultado.rows);
+    const resultado = await Voluntariados.findAll({
+        include: {
+            model: Areas,
+            attributes: ["nombreArea"]
+        },
+        attributes: ["titulo", "ubicacion", "duracion", "quehacer", "beneficio", "cantidad", "img"]
+    }).then(resultado => res.json(resultado))
 });
 
+// FILTRAR VOLUNTARIADOS
+app.get("/api/v2/voluntariados", async (req,res) => {
+    const resultado = await Voluntariados.findAll({
+        include: {
+            model: Areas,
+            attributes: ["nombreArea"],
+            where: {id: 1}
+        },
+        attributes: ["titulo", "ubicacion", "duracion", "quehacer", "beneficio", "cantidad", "img"]
+    }).then(resultado => res.json(resultado))
+});
 
 // RENOVAR
-// app.post("/api/v1/registerVoluntario", (req, res) => {
+// app.post("registerVoluntario", (req, res) => {
 //     Usuario.create({
 //         nombre: req.body.nombre,
 //         apellidos: req.body.apellidos,

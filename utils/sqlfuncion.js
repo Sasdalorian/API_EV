@@ -3,7 +3,6 @@ import { Rol } from "../database/models/Rol.js";
 import { Usuario } from "../database/models/Usuario.js";
 import { Areas } from "../database/models/Areas.js";
 import { Voluntariados } from "../database/models/Voluntariados.js";
-// import { Areavolunt } from "../database/models/Areavolunt.js";
 
 // CARGAR TABLAS
 export async function syncTables() {
