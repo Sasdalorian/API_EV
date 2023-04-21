@@ -2,7 +2,6 @@ import { Rol } from "./database/models/Rol.js";
 import { Usuario } from "./database/models/Usuario.js";
 import { Areas} from "./database/models/Areas.js";
 import { Voluntariados } from "./database/models/Voluntariados.js";
-// import { Areavolunt } from "./database/models/Areavolunt.js";
 
 import { syncTables, agregarRol, agregarUsuario, agregarArea, agregarVoluntariado } from "./utils/sqlfuncion.js";
 

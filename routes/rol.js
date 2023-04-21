@@ -1,7 +1,7 @@
-import express from "express";
 import { Router } from "express";
 import { Usuario } from "../database/models/Usuario.js";
 import { Rol } from "../database/models/Rol.js";
+
 const rolRouter = Router();
 
 rolRouter.get("/",(req, res) => {
