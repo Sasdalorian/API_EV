@@ -1,19 +1,26 @@
-import express from "express";
-    //IMPORTAR MODELOS
+
+import app from "./app.js";
+import { sequelize } from "./database/data.js";
+
+//IMPORTAR MODELOS
 import { Rol } from "./database/models/Rol.js";
 import { Usuario } from "./database/models/Usuario.js";
 import { Voluntariados } from "./database/models/Voluntariados.js";
 import { Areas } from "./database/models/Areas.js";
 
-const app = express();
-
-    // Middlewares
-app.use(express.json());
-
     // CONECTAR DB A PUERTO 4000
-app.listen(4000, (req,res) => {
-    console.log('La DB se ha conectado al puerto 4000');
-});
+async function conectarDB() {
+    try {
+        await sequelize.authenticate();
+        app.listen(4000);
+        console.log("Conexion establecida a la DB");
+    } catch (error) {
+        console.log("Error al conectar a la DB", error)
+    }
+};
+conectarDB();
+
+
 
     // MOSTRAR VOLUNTARIADOS
 app.get("/api/v1/voluntariados", async (req, res) => {
