@@ -1,27 +1,27 @@
-import { sequelize } from "../data.js";
+import { sequelize } from "../../config/database.js";
 import { DataTypes, Model } from "sequelize";
 
-export class Rol extends Model{};
+export class Areas extends Model{};
 
-Rol.init({
-    idrol: {
+Areas.init({
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
         autoIncrement: true
     },
-    clase: {
-        type: DataTypes.STRING(10),
+    nombreArea: {
+        type: DataTypes.STRING(25),
         allowNull: false
     }
-},
+}, 
 {
     sequelize,
-    tableName: 'roles',
+    tableName: 'areas',
     createdAt: false,
     updatedAt: false,
-    name: { 
-        singular: "rol",
-        plural: "roles"
+    name: {
+        singular: "area",
+        plural: "areas"
     }
 });

@@ -1,18 +1,9 @@
-import { sequelize } from "../database/data.js";
-import { Rol } from "../database/models/Rol.js";
-import { Usuario } from "../database/models/Usuario.js";
-import { Areas } from "../database/models/Areas.js";
-import { Voluntariados } from "../database/models/Voluntariados.js";
 
-// CARGAR TABLAS
-export async function syncTables() {
-    try {
-        await sequelize.sync({ force: true })
-        console.log("Tablas sincronizadas correctamente.")
-    } catch (error) {
-        console.error("No se han podido sincronizar las Tablas.")
-    }
-}
+// IMPORT MODELS
+import { Areas } from "../models/Areas.js";
+import { Voluntariados } from "../models/Voluntariados.js";
+import { Rol } from "../models/Rol.js";
+import { Usuario } from "../models/Usuario.js";
 
 // AGREGAR ROLES
 export async function agregarRol(nombre) {

@@ -1,4 +1,4 @@
-import { sequelize } from "../data.js";
+import { sequelize } from "../../config/database.js";
 import { DataTypes, Model } from "sequelize";
 
 import { Rol } from "./Rol.js"; 
@@ -33,6 +33,7 @@ Usuario.init({
     email: {
         type: DataTypes.STRING(100),
         allowNull: false,
+        unique: true,
         validate: {
             isEmail: {
                 args: true,
@@ -44,7 +45,7 @@ Usuario.init({
         }
     },
     pass: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.STRING(255),
         allowNull: false,
         validate: {
             notNull: {
@@ -68,6 +69,3 @@ Usuario.init({
 Rol.hasMany(Usuario, {foreignKey: "idrol"});
 // Uno a Muchos, 1 a N
 Usuario.belongsTo(Rol, {foreignKey: "idrol"});
-
-
-

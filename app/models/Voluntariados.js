@@ -1,4 +1,4 @@
-import { sequelize } from "../data.js";
+import { sequelize } from "../../config/database.js";
 import { DataTypes, Model } from "sequelize";
 
 import { Usuario } from "./Usuario.js";
@@ -53,12 +53,6 @@ Voluntariados.init({
     }
 });
 
-// Muchos a Muchos, NaN
-
-// //Voluntariados tiene muchas Areas
-// // Crea nueva tabla en la base de datos llamada areavolunt
-// Voluntariados.belongsToMany(Areas, { through: "areavolunt"});
-// Areas.belongsToMany(Voluntariados, {through: "areavolunt"});
 
 Voluntariados.belongsToMany(Areas, {through: "Areavolunt"});
 Areas.belongsToMany(Voluntariados, {through: "Areavolunt"});

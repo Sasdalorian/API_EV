@@ -1,9 +1,5 @@
-import { Rol } from "./database/models/Rol.js";
-import { Usuario } from "./database/models/Usuario.js";
-import { Areas} from "./database/models/Areas.js";
-import { Voluntariados } from "./database/models/Voluntariados.js";
-
-import { syncTables, agregarRol, agregarUsuario, agregarArea, agregarVoluntariado } from "./utils/sqlfuncion.js";
+import { syncTables } from "./index.js";
+import { agregarArea, agregarRol, agregarVoluntariado, agregarUsuario} from "./app/controllers/Controllers.js"
 
 await syncTables();
 await agregarRol("Admin");
