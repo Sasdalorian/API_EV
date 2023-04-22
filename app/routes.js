@@ -5,27 +5,16 @@ import { Voluntariados } from "./models/Voluntariados.js";
 
 import app from "./app.js";
 
-const indexRouter = Router();
+const router = Router();
 
     // Controllers
-import { syncTables } from "../index.js";
-import { Usuario } from "./models/Usuario.js";
 import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "./controllers/AuthControllers.js";
+import { mostrarVoluntariados } from "./controllers/Controllers.js";
 
 
-indexRouter.get("/api/v1/voluntariados", async (req, res) => {
-    const resultado = await Voluntariados.findAll({
-        include: {
-            model: Areas,
-            attributes: ["nombreArea"]
-        },
-        attributes: ["titulo", "ubicacion", "duracion", "quehacer", "beneficio", "cantidad", "img"]
-    }).then(resultado => res.json(resultado));
-});
+router.get("/api/v1/voluntariados", mostrarVoluntariados);
+router.post("/api/v1/registerAnfitrion", nuevoAnfitrion);
+router.post("/api/v1/registerVoluntario", nuevoVoluntario);
+router.post("/api/v1/iniciarSesion", loginUser);
 
-
-indexRouter.post("/api/v1/registerAnfitrion", nuevoAnfitrion);
-indexRouter.post("/api/v1/registerVoluntario", nuevoVoluntario);
-indexRouter.post("/api/v1/iniciarSesion", loginUser);
-
-export default indexRouter;
+export default router;

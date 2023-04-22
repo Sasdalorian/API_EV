@@ -5,6 +5,24 @@ import { Voluntariados } from "../models/Voluntariados.js";
 import { Rol } from "../models/Rol.js";
 import { Usuario } from "../models/Usuario.js";
 
+// MOSTRAR VOLUNTARIADOS
+export async function mostrarVoluntariados(req, res) {
+    try {
+        const resultado = await Voluntariados.findAll({
+            include: {
+                model: Areas,
+                attributes: ["nombreArea"]
+            },
+            attributes: ["titulo", "ubicacion", "duracion", "quehacer", "beneficio", "cantidad", "img"]
+        }).then(resultado => res.json(resultado));
+    } catch (error) {
+        console.log(error)
+    }
+};
+
+
+
+
 // AGREGAR ROLES
 export async function agregarRol(nombre) {
     try {
