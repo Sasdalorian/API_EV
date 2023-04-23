@@ -56,3 +56,6 @@ Voluntariados.init({
 
 Voluntariados.belongsToMany(Areas, {through: "Areavolunt"});
 Areas.belongsToMany(Voluntariados, {through: "Areavolunt"});
+
+Voluntariados.belongsToMany(Usuario, {through: "Uservolunt"});
+Usuario.belongsToMany(Voluntariados, {through: "Uservolunt"});
