@@ -20,8 +20,16 @@ export async function mostrarVoluntariados(req, res) {
     }
 };
 
-
-
+// MOSTRAR USUARIOS
+export async function mostrarUsuarios(req, res) {
+    try {
+        const resultado = await Usuario.findAll({
+            attributes: ["nombre", "apellidos", "email", "idrol"]
+        }).then(resultado => res.json(resultado));
+    } catch (error) {
+        console.log(error)
+    }
+};
 
 // AGREGAR ROLES
 export async function agregarRol(nombre) {

@@ -1,20 +1,27 @@
 import { Router } from "express";
 import { Areas } from "./models/Areas.js";
 import { Voluntariados } from "./models/Voluntariados.js";
-
-
-import app from "./app.js";
+import { adminShowVolunt, deleteVolunt } from "./controllers/AdminControllers.js";
 
 const router = Router();
 
-    // Controllers
+// Controllers
 import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "./controllers/AuthControllers.js";
-import { mostrarVoluntariados } from "./controllers/Controllers.js";
+import { mostrarUsuarios, mostrarVoluntariados } from "./controllers/Controllers.js";
 
 
+//GET
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
+router.get("/api/v1/usuarios", mostrarUsuarios);
+router.get("/api/v1/administracion", adminShowVolunt);
+
+//POST
 router.post("/api/v1/registerAnfitrion", nuevoAnfitrion);
 router.post("/api/v1/registerVoluntario", nuevoVoluntario);
 router.post("/api/v1/iniciarSesion", loginUser);
+
+//DELETE
+router.delete("/api/v1/deletevolunt/:id", deleteVolunt);
+
 
 export default router;

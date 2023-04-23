@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 // IMPORT MODELS
 import { Usuario } from "../models/Usuario.js";
 
-
     // SIGN UP
 // AGREGAR Anfitrion
 export const nuevoAnfitrion = async (req, res) => {
@@ -21,6 +20,7 @@ export const nuevoAnfitrion = async (req, res) => {
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
+    res.json("Success");
 }
 // AGREGAR VOLUNTARIADO
 export const nuevoVoluntario = async (req, res) => {
@@ -37,7 +37,8 @@ export const nuevoVoluntario = async (req, res) => {
         res.json(resultado);
     } catch (error) {
         return res.status(500).json(error);
-    } 
+    }
+    res.json("Success");
 }
 
     // LOGIN
@@ -64,4 +65,5 @@ export const loginUser = async (req, res) => {
     } catch (error) {
         return res.status(500).json(error)
     }
+    res.json("Success");
 }
