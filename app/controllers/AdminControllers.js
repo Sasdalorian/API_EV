@@ -18,6 +18,7 @@ export async function adminShowVolunt (req, res) {
 };
 
 export async function deleteVolunt (req, res) {
+    console.log("entra?")
     try {
         const {id} = req.params;
         const resultado = await Voluntariados.destroy({
