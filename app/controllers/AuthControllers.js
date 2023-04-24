@@ -1,44 +1,49 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // IMPORT MODELS
 import { Usuario } from "../models/Usuario.js";
 
     // SIGN UP
-// AGREGAR Anfitrion
-export const nuevoAnfitrion = async (req, res) => {
-    try {
-        const {nombre, apellidos, email, pass} = req.body;
-        const idRol = 3;
-        const resultado = await Usuario.create({
-            nombre: nombre,
-            apellidos: apellidos,
-            email: email,
-            pass: pass,
-            idrol: idRol
-        });
-        res.json(resultado);
-    } catch (error) {
-        return res.status(500).json({message: error.message});
-    }
-    res.json("Success");
-}
+
 // AGREGAR VOLUNTARIADO
 export const nuevoVoluntario = async (req, res) => {
+
     try {
-        const {nombre, apellidos, email, pass} = req.body;
+        const {nombre, apellidos, email, passE} = req.body;
         const idRol = 2;
+        console.log(nombre, apellidos, email, passE);
+        //console.log(nombre, apellidos, email, pass, idRol);
         const resultado = await Usuario.create({
             nombre: nombre,
             apellidos: apellidos,
             email: email,
-            pass: pass,
+            pass: passE,
             idrol: idRol
         })
         res.json(resultado);
     } catch (error) {
         return res.status(500).json(error);
     }
-    res.json("Success");
+}
+// AGREGAR Anfitrion
+export const nuevoAnfitrion = async (req, res) => {
+    try {
+        const {nombre, apellidos, email, passE} = req.body;
+        const idRol = 3;
+        console.log(nombre, apellidos, email, passE);
+        const resultado = await Usuario.create({
+            nombre: nombre,
+            apellidos: apellidos,
+            email: email,
+            pass: passE,
+            idrol: idRol
+        });
+        console.log("usuario creado?")
+        res.json(resultado);
+    } catch (error) {
+        return res.status(500).json({message: error.message});
+    }
 }
 
     // LOGIN
@@ -57,8 +62,8 @@ export const loginUser = async (req, res) => {
                 if(bcrypt.compareSync(pass, Usuario.pass)) {
                     console.log("Login Exitoso");
                 } else {
-                    res.status(401).json({ msg: "Contraseña Incorrecta"});
                     console.log("Contraseña Incorrecta");
+                    return;
                 }
             }
         })
