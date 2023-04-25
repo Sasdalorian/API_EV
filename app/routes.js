@@ -1,13 +1,14 @@
 import { Router } from "express";
-import { Areas } from "./models/Areas.js";
-import { Voluntariados } from "./models/Voluntariados.js";
 import { adminShowVolunt, deleteVolunt } from "./controllers/AdminControllers.js";
-
-const router = Router();
 
 // Controllers
 import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "./controllers/AuthControllers.js";
 import { mostrarUsuarios, mostrarVoluntariados } from "./controllers/Controllers.js";
+import cookieParser from "cookie-parser";
+
+const router = Router();
+router.use(cookieParser());
+
 
 
 //GET
@@ -22,6 +23,5 @@ router.post("/api/v1/iniciarSesion", loginUser);
 
 //DELETE
 router.delete("/api/v1/deletevolunt/:id", deleteVolunt);
-
 
 export default router;
