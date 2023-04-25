@@ -4,10 +4,8 @@ import { adminShowVolunt, deleteVolunt } from "./controllers/AdminControllers.js
 // Controllers
 import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "./controllers/AuthControllers.js";
 import { mostrarUsuarios, mostrarVoluntariados } from "./controllers/Controllers.js";
-import cookieParser from "cookie-parser";
 
 const router = Router();
-router.use(cookieParser());
 
 
 
