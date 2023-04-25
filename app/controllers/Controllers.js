@@ -24,6 +24,10 @@ export async function mostrarVoluntariados(req, res) {
 export async function mostrarUsuarios(req, res) {
     try {
         const resultado = await Usuario.findAll({
+            include: {
+                model: Rol,
+                attributes: ["clase"]
+            },
             attributes: ["nombre", "apellidos", "email", "idrol"]
         }).then(resultado => res.json(resultado));
     } catch (error) {

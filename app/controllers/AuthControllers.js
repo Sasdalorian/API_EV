@@ -47,29 +47,41 @@ export const nuevoAnfitrion = async (req, res) => {
 }
 
     // LOGIN
-export const loginUser = async (req, res) => {
-    try {
+    export const loginUser = async (req, res) => {
+      try {
         const { email, pass } = req.body;
-        Usuario.findOne({
+        const usuario = await Usuario.findOne({
           where: {
             email: email,
           },
-        }).then((Usuario) => {
-          if (!Usuario) {
-            res.status(404).json({ msg: "Email no encontrado." });
-            console.log("Email no encontrado.");
-          } else {
-            if (bcrypt.compareSync(pass, Usuario.pass)) {
-              console.log("Login Exitoso");
-              const token = jwt.sign({ email: email }, "secretkey");
-              res.json({ token });
-            } else {
-              console.log("Contraseña Incorrecta");
-              res.status(401).json({ msg: "Contraseña Incorrecta" });
-            }
-          }
         });
+        if (!usuario) {
+          return res.status(404).json({ msg: "Email no encontrado." });
+        }
+    
+        if (bcrypt.compareSync(pass, usuario.pass)) {
+          console.log("Login Exitoso");
+          const token = jwt.sign({ email: email }, process.env.JWT_SECRETO);
+          console.log(token);
+          
+          if (usuario) {
+            const newToken = jwt.sign({ usuario: email, clave: pass }, process.env.JWT_SECRETO, {
+              expiresIn: process.env.JWT_TIEMPO_EXPIRA,
+            });
+
+            const decodedToken = jwt.verify(newToken, process.env.JWT_SECRETO);
+            console.log(decodedToken);
+            
+            res.json([{ estado: true, token: newToken }]);
+          } else {
+            res.json([{ estado: false, token: "" }]);
+          }
+        } else {
+          console.log("Contraseña Incorrecta");
+          return res.status(401).json({ msg: "Contraseña Incorrecta" });
+        }
       } catch (error) {
+        console.log(error);
         return res.status(500).json(error);
       }
-};
+    };

@@ -4,10 +4,19 @@ import { adminShowVolunt, deleteVolunt } from "./controllers/AdminControllers.js
 // Controllers
 import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "./controllers/AuthControllers.js";
 import { mostrarUsuarios, mostrarVoluntariados } from "./controllers/Controllers.js";
+import { validateToken } from "../config/database.js";
 
 const router = Router();
 
-
+router.get("/token/:token", async (req, res) => {
+    const { token } = req.params;
+    try {
+      const resultado = await validateToken(token);
+      res.json(resultado);
+    } catch (error) {
+      res.status(500).json({ estado: false, msg: "Error al validar el token" });
+    }
+  });
 
 //GET
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
