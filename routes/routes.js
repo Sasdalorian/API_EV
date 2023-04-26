@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { adminShowVolunt, deleteVolunt } from "./controllers/AdminControllers.js";
+import { adminShowVolunt, deleteVolunt } from "../app/controllers/AdminControllers.js";
 
 // Controllers
-import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "./controllers/AuthControllers.js";
-import { mostrarUsuarios, mostrarVoluntariados } from "./controllers/Controllers.js";
+import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "../app/controllers/AuthControllers.js";
+import { mostrarUsuarios, mostrarVoluntariados } from "../app/controllers/Controllers.js";
 import { validateToken } from "../config/database.js";
 
 const router = Router();
@@ -18,9 +18,12 @@ router.get("/token/:token", async (req, res) => {
     }
   });
 
-//GET
+//TRAE VOLUNTARIADOS PARA MOSTRARLOS EN LA TABLA
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
+//TRAE LOS USUARIOS Y LOS MUESTRA
 router.get("/api/v1/usuarios", mostrarUsuarios);
+
+//MUESTRA VOLUNTARIADOS PARA TABLA ADM
 router.get("/api/v1/administracion", adminShowVolunt);
 
 //POST
