@@ -20,23 +20,6 @@ export async function mostrarUsuarios(req, res) {
 };
 
 //FILTRAR VOLUNTARIADOS POR AREA
-export async function mostrarVoluntariadosPorArea(req, res) {
-    try {
-      const { idArea } = req.params;
-      const resultado = await Voluntariados.findAll({
-        include: {
-          model: Areas,
-          where: { id: idArea },
-          attributes: ["id", "nombreArea"]
-        },
-        attributes: ["id", "titulo", "ubicacion", "duracion", "quehacer", "beneficio", "cantidad", "img"]
-      });
-      res.json(resultado);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send("Error al obtener los voluntariados");
-    }
-};
 
 // MOSTRAR ADMINS
 export async function mostrarAdmins(req, res) {

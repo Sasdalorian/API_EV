@@ -1,10 +1,12 @@
-import express from "express";
-import indexRouter from "../routes/routes.js";
-
 const app = express();
+
+
+//Import
+import express from "express";
+import router from "../routes/routes.js";
 
     //Middlewares
 app.use(express.json());
-app.use(indexRouter);
+app.use(router);
 
 export default app;

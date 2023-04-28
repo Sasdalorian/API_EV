@@ -66,7 +66,7 @@ export const nuevoAnfitrion = async (req, res) => {
           
           if (usuario) {
             const newToken = jwt.sign({ usuario: email, clave: pass }, process.env.JWT_SECRETO, {
-              expiresIn: process.env.JWT_TIEMPO_EXPIRA,
+              expiresIn: process.env.JWT_TIEMPO_EXPIRA
             });
 
             const decodedToken = jwt.verify(newToken, process.env.JWT_SECRETO);

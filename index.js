@@ -5,7 +5,7 @@ async function conectarDB() {
     try {
         await sequelize.authenticate();
         app.listen(4000);
-        console.log("Conexion establecida a la DB");
+        console.log("Conexion establecida a la DataBase 'proyectoInd'");
     } catch (error) {
         console.log("Error al conectar a la DB", error)
     }
