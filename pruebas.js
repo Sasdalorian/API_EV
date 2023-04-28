@@ -13,7 +13,7 @@ await agregarUsuario("Ignacio", "Wallace", "ignacio.wallace@gmail.com", "1234", 
 await agregarArea("Niños");
 await agregarArea("Emergencias");
 await agregarArea("Adulto Mayor");
-await agregarArea("Animal");
+await agregarArea("Animales");
 await agregarArea("Discapacidad");
 await agregarArea("Medio Ambiente");
 await agregarArea("Talleres");

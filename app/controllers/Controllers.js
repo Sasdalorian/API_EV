@@ -11,24 +11,9 @@ export async function mostrarVoluntariados(req, res) {
         const resultado = await Voluntariados.findAll({
             include: {
                 model: Areas,
-                attributes: ["nombreArea"]
+                attributes: ["id","nombreArea"]
             },
-            attributes: ["titulo", "ubicacion", "duracion", "quehacer", "beneficio", "cantidad", "img"]
-        }).then(resultado => res.json(resultado));
-    } catch (error) {
-        console.log(error)
-    }
-};
-
-// MOSTRAR USUARIOS
-export async function mostrarUsuarios(req, res) {
-    try {
-        const resultado = await Usuario.findAll({
-            include: {
-                model: Rol,
-                attributes: ["clase"]
-            },
-            attributes: ["nombre", "apellidos", "email", "idrol"]
+            attributes: ["id", "titulo", "ubicacion", "duracion", "quehacer", "beneficio", "cantidad", "img"]
         }).then(resultado => res.json(resultado));
     } catch (error) {
         console.log(error)
