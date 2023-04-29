@@ -1,7 +1,5 @@
 import { Usuario } from "../app/models/Usuario.js";
 import { Rol } from "../app/models/Rol.js";
-import { Areas } from "../app/models/Areas.js";
-import { Voluntariados } from "../app/models/Voluntariados.js";
 
 // MOSTRAR USUARIOS
 export async function mostrarUsuarios(req, res) {

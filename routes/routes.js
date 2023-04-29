@@ -6,9 +6,11 @@ import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "../app/controllers/A
 import { mostrarVoluntariados } from "../app/controllers/Controllers.js";
 import { validateToken } from "../config/database.js";
 import { mostrarAdmins, mostrarUsuarios } from "../utils/funciones.js";
+import { mostrarVoluntariadosAsc, mostrarVoluntariadosDesc } from "../utils/gets.js";
 
 const router = Router();
 
+//CONFIRMA SI EL TOKEN ES VALIDO
 router.get("/token/:token", async (req, res) => {
     const { token } = req.params;
     try {
@@ -17,10 +19,14 @@ router.get("/token/:token", async (req, res) => {
     } catch (error) {
       res.status(500).json({ estado: false, msg: "Error al validar el token" });
     }
-  });
+});
 
 //TRAE VOLUNTARIADOS PARA MOSTRARLOS EN LA TABLA
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
+//TRAE VOLUNTARIADOS ORDENADOS DE FORMA DESC PARA MOSTRARLOS EN TABLA
+router.get("/api/v1/voluntariadosDesc", mostrarVoluntariadosDesc);
+//TRAE VOLUNTARIADOS ORDENADOS DE FORMA ASC PARA MOSTRARLOS EN TABLA
+router.get("/api/v1/voluntariadosAsc", mostrarVoluntariadosAsc);
 
 //TRAE LOS USUARIOS Y LOS MUESTRA
 router.get("/api/v1/usuarios", mostrarUsuarios);
