@@ -47,41 +47,40 @@ export const nuevoAnfitrion = async (req, res) => {
 }
 
     // LOGIN
-    export const loginUser = async (req, res) => {
-      try {
-        const { email, pass } = req.body;
-        const usuario = await Usuario.findOne({
-          where: {
-            email: email,
+export const loginUser = async (req, res) => {
+  try {
+    const { email, pass } = req.body;
+    const usuario = await Usuario.findOne({
+      where: {
+        email: email,
           },
-        });
-        if (!usuario) {
-          return res.status(404).json({ msg: "Email no encontrado." });
-        }
-    
-        if (bcrypt.compareSync(pass, usuario.pass)) {
-          console.log("Login Exitoso");
-          const token = jwt.sign({ email: email }, process.env.JWT_SECRETO);
-          console.log(token);
-          
-          if (usuario) {
-            const newToken = jwt.sign({ usuario: email, clave: pass }, process.env.JWT_SECRETO, {
-              expiresIn: process.env.JWT_TIEMPO_EXPIRA
-            });
+    });
+    if (!usuario) {
+    return res.status(404).json({ msg: "Email no encontrado." });
+    }
+      if (bcrypt.compareSync(pass, usuario.pass)) {
+        console.log("Login Exitoso");
+        const token = jwt.sign({ email: email }, process.env.JWT_SECRETO);
+        console.log(token);
+        
+        if (usuario) {
+          const newToken = jwt.sign({ usuario: email, clave: pass }, process.env.JWT_SECRETO, {
+            expiresIn: process.env.JWT_TIEMPO_EXPIRA
+          });
 
-            const decodedToken = jwt.verify(newToken, process.env.JWT_SECRETO);
-            console.log(decodedToken);
+          const decodedToken = jwt.verify(newToken, process.env.JWT_SECRETO);
+          console.log(decodedToken);
             
-            res.json([{ estado: true, token: newToken }]);
-          } else {
-            res.json([{ estado: false, token: "" }]);
-          }
+          res.json([{ estado: true, token: newToken }]);
         } else {
-          console.log("Contraseña Incorrecta");
-          return res.status(401).json({ msg: "Contraseña Incorrecta" });
+          res.json([{ estado: false, token: "" }]);
         }
-      } catch (error) {
-        console.log(error);
-        return res.status(500).json(error);
+      } else {
+        console.log("Contraseña Incorrecta");
+        return res.status(401).json({ msg: "Contraseña Incorrecta" });
       }
-    };
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+};

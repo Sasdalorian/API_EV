@@ -1,12 +1,11 @@
 import { Router } from "express";
-import { deleteVolunt } from "../app/controllers/AdminControllers.js";
+import { deleteVolunt } from "../utils/delete.js";
 
 // Controllers
 import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "../app/controllers/AuthControllers.js";
-import { mostrarVoluntariados } from "../app/controllers/Controllers.js";
 import { validateToken } from "../config/database.js";
 import { mostrarAdmins, mostrarUsuarios } from "../utils/funciones.js";
-import { mostrarVoluntariadosAsc, mostrarVoluntariadosDesc } from "../utils/gets.js";
+import { mostrarVoluntariados, topAreas, topAreasAsc, topAreasDesc } from "../utils/gets.js";
 
 const router = Router();
 
@@ -23,20 +22,36 @@ router.get("/token/:token", async (req, res) => {
 
 //TRAE VOLUNTARIADOS PARA MOSTRARLOS EN LA TABLA
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
-//TRAE VOLUNTARIADOS ORDENADOS DE FORMA DESC PARA MOSTRARLOS EN TABLA
-router.get("/api/v1/voluntariadosDesc", mostrarVoluntariadosDesc);
-//TRAE VOLUNTARIADOS ORDENADOS DE FORMA ASC PARA MOSTRARLOS EN TABLA
-router.get("/api/v1/voluntariadosAsc", mostrarVoluntariadosAsc);
+
+// //TRAE VOLUNTARIADOS ORDENADOS DE FORMA DESC PARA MOSTRARLOS EN TABLA
+// router.get("/api/v1/voluntariadosDesc", mostrarVoluntariadosDesc);
+// //TRAE VOLUNTARIADOS ORDENADOS DE FORMA ASC PARA MOSTRARLOS EN TABLA
+// router.get("/api/v1/voluntariadosAsc", mostrarVoluntariadosAsc);
 
 //TRAE LOS USUARIOS Y LOS MUESTRA
 router.get("/api/v1/usuarios", mostrarUsuarios);
 //TRAE A LOS ADMIN Y LOS MUESTRA
 router.get("/api/v1/admin", mostrarAdmins);
 
+// TopAreas
+router.get("/api/v1/topAreas", topAreas);
+// TopAreasDesc
+router.get("/api/v1/top/topAreasDesc", topAreasDesc);
+// TopAreasAsc
+router.get("/api/v1/top/topAreasAsc", topAreasAsc);
+
+
 //POST
 router.post("/api/v1/registerAnfitrion", nuevoAnfitrion);
 router.post("/api/v1/registerVoluntario", nuevoVoluntario);
 router.post("/api/v1/iniciarSesion", loginUser);
+
+
+
+
+
+//EDIT  // ARREGLAR
+router.put("/api/v1/edit/volunteer/:id");
 
 //DELETE
 router.delete("/api/v1/deletevolunt/:id", deleteVolunt);

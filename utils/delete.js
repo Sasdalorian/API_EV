@@ -1,7 +1,6 @@
-import { Voluntariados } from "../models/Voluntariados.js";
+import { Voluntariados } from "../app/models/Voluntariados.js";
 
 export async function deleteVolunt (req, res) {
-    console.log("entra?")
     try {
         const {id} = req.params;
         const resultado = await Voluntariados.destroy({
@@ -9,7 +8,8 @@ export async function deleteVolunt (req, res) {
                 id: id
             }
         });
-        res.sendStatus(204);
+        res.sendStatus(204)
+        console.log(`El Voluntariado con el id: ${id} ha sido eliminado`);
     } catch (error) {
         return res.status(500).json({message:error.message});
     }
