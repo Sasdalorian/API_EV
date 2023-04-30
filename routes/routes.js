@@ -2,10 +2,13 @@ import { Router } from "express";
 import { deleteVolunt } from "../utils/delete.js";
 
 // Controllers
-import { nuevoAnfitrion, nuevoVoluntario, loginUser } from "../app/controllers/AuthControllers.js";
-import { validateToken } from "../config/database.js";
+import { nuevoAnfitrion, nuevoVoluntario } from "../app/controllers/register.js";
+import { loginUser } from "../app/controllers/login.js"
 import { mostrarAdmins, mostrarUsuarios } from "../utils/funciones.js";
 import { mostrarVoluntariados, topAreas, topAreasAsc, topAreasDesc } from "../utils/gets.js";
+
+// Prueba
+import { validateToken } from "../config/database.js";
 
 const router = Router();
 
@@ -22,11 +25,6 @@ router.get("/token/:token", async (req, res) => {
 
 //TRAE VOLUNTARIADOS PARA MOSTRARLOS EN LA TABLA
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
-
-// //TRAE VOLUNTARIADOS ORDENADOS DE FORMA DESC PARA MOSTRARLOS EN TABLA
-// router.get("/api/v1/voluntariadosDesc", mostrarVoluntariadosDesc);
-// //TRAE VOLUNTARIADOS ORDENADOS DE FORMA ASC PARA MOSTRARLOS EN TABLA
-// router.get("/api/v1/voluntariadosAsc", mostrarVoluntariadosAsc);
 
 //TRAE LOS USUARIOS Y LOS MUESTRA
 router.get("/api/v1/usuarios", mostrarUsuarios);
