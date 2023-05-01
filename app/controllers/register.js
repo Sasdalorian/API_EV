@@ -4,7 +4,9 @@ import { Usuario } from "../models/Usuario.js";
 // AGREGAR VOLUNTARIADO
 export const nuevoVoluntario = async (req, res) => {
     try {
+      // Rescatamos los parametros del body
       const {nombre, apellidos, email, passE} = req.body;
+      // Designamos el idRol de Voluntariado
       const idRol = 2;
       console.log(nombre, apellidos, email, passE);
   
@@ -13,7 +15,7 @@ export const nuevoVoluntario = async (req, res) => {
       if (usuarioExistente) {
         return res.status(400).json({mensaje: 'El correo electrónico ya está registrado'});
       }
-      // si no existe, se creara e ingresara en la tabla Usuario
+      // Si no existe, se creara e ingresara en la tabla Usuario
       const resultado = await Usuario.create({
         nombre: nombre,
         apellidos: apellidos,
@@ -31,14 +33,16 @@ export const nuevoVoluntario = async (req, res) => {
 // AGREGAR Anfitrion
 export const nuevoAnfitrion = async (req, res) => {
     try {
-        const {nombre, apellidos, email, passE} = req.body;
-        const idRol = 3;
-        console.log(nombre, apellidos, email, passE);
+      // Rescatamos los parametros del body
+      const {nombre, apellidos, email, passE} = req.body;
+      // Designamos el idRol de Anfitrion
+      const idRol = 3;
+      console.log(nombre, apellidos, email, passE);
 
-        // si no existe, se creara e ingresara en la tabla Usuario
-        const usuarioExistente = await Usuario.findOne({email: email});
-        if (usuarioExistente) {
-        return res.status(400).json({mensaje: 'El correo electrónico ya está registrado'});
+      // Si no existe, se creara e ingresara en la tabla Usuario
+      const usuarioExistente = await Usuario.findOne({email: email});
+      if (usuarioExistente) {
+      return res.status(400).json({mensaje: 'El correo electrónico ya está registrado'});
     }
   
     const resultado = await Usuario.create({

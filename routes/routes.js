@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { deleteVolunt } from "../utils/delete.js";
+import passport from "../app/controllers/passport.js";
 
 // Controllers
 import { nuevoAnfitrion, nuevoVoluntario } from "../app/controllers/register.js";
-import { loginUser } from "../app/controllers/login.js"
+import { loginUser, authMiddleware } from "../app/controllers/login.js"
 import { mostrarAdmins, mostrarUsuarios } from "../utils/funciones.js";
 import { mostrarVoluntariados, topAreas, topAreasAsc, topAreasDesc } from "../utils/gets.js";
+import { deleteVolunt } from "../utils/delete.js";
 
 // Prueba
 import { validateToken } from "../config/database.js";
@@ -25,6 +26,7 @@ router.get("/token/:token", async (req, res) => {
 
 //TRAE VOLUNTARIADOS PARA MOSTRARLOS EN LA TABLA
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
+router.get("/api/v1/Admvoluntariados", authMiddleware, mostrarVoluntariados);
 
 //TRAE LOS USUARIOS Y LOS MUESTRA
 router.get("/api/v1/usuarios", mostrarUsuarios);
@@ -43,10 +45,6 @@ router.get("/api/v1/top/topAreasAsc", topAreasAsc);
 router.post("/api/v1/registerAnfitrion", nuevoAnfitrion);
 router.post("/api/v1/registerVoluntario", nuevoVoluntario);
 router.post("/api/v1/iniciarSesion", loginUser);
-
-
-
-
 
 //EDIT  // ARREGLAR
 router.put("/api/v1/edit/volunteer/:id");
