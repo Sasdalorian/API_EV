@@ -5,7 +5,7 @@ import { nuevoAnfitrion, nuevoVoluntario } from "../app/controllers/register.js"
 import { loginUser, authMiddleware } from "../app/controllers/login.js"
 import { mostrarAdmins, mostrarUsuarios } from "../utils/funciones.js";
 import { mostrarVoluntariados, topAreas, topAreasAsc, topAreasDesc } from "../utils/gets.js";
-import { deleteVolunt } from "../utils/delete.js";
+import { deleteAdmin, deleteUsuario, deleteVolunt } from "../utils/delete.js";
 
 // Prueba
 import { validateToken } from "../config/database.js";
@@ -50,5 +50,7 @@ router.put("/api/v1/edit/volunteer/:id");
 
 //DELETE
 router.delete("/api/v1/deletevolunt/:id", deleteVolunt);
+router.delete("/api/v1/deleteusuario/:id", deleteUsuario);
+router.delete("/api/v1/deleteadmin/:id", deleteAdmin);
 
 export default router;
