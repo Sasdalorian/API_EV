@@ -1,5 +1,4 @@
 import { Router } from "express";
-import passport from "../app/controllers/passport.js";
 
 // Controllers
 import { nuevoAnfitrion, nuevoVoluntario } from "../app/controllers/register.js";

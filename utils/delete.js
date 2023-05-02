@@ -2,7 +2,9 @@ import { Voluntariados } from "../app/models/Voluntariados.js";
 
 export async function deleteVolunt (req, res) {
     try {
+        // Se captura el id de la URL
         const {id} = req.params;
+        // Se busca entre los voluntariados el id que capturamos para eliminarlo
         const resultado = await Voluntariados.destroy({
             where: {
                 id: id
