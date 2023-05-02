@@ -2,7 +2,7 @@ import { Router } from "express";
 
 // Controllers
 import { nuevoAnfitrion, nuevoVoluntario } from "../app/controllers/register.js";
-import { loginUser, authMiddleware } from "../app/controllers/login.js"
+import { loginUser, authMiddleware, logoutUser } from "../app/controllers/login.js"
 import { mostrarAdmins, mostrarUsuarios } from "../utils/funciones.js";
 import { mostrarVoluntariados, topAreas, topAreasAsc, topAreasDesc } from "../utils/gets.js";
 import { deleteAdmin, deleteUsuario, deleteVolunt } from "../utils/delete.js";
@@ -44,6 +44,7 @@ router.get("/api/v1/top/topAreasAsc", topAreasAsc);
 router.post("/api/v1/registerAnfitrion", nuevoAnfitrion);
 router.post("/api/v1/registerVoluntario", nuevoVoluntario);
 router.post("/api/v1/iniciarSesion", loginUser);
+router.post("/api/v1/logout", logoutUser);
 
 //EDIT  // ARREGLAR
 router.put("/api/v1/edit/volunteer/:id");

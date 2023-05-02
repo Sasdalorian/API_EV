@@ -56,3 +56,14 @@ export const authMiddleware = async (req, res, next) => {
     res.status(401).json({ message: 'Token inválido' });
   }
 }
+
+
+//CerrarSesion
+export const logoutUser = async (req, res) => {
+  try {
+    res.json({ token: null }); // Envía una respuesta con el token de autenticación a null para borrarlo
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'Ha ocurrido un error al intentar cerrar sesión. Por favor, inténtelo de nuevo más tarde.' });
+  }
+};
