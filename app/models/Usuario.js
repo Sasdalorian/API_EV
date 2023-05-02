@@ -35,10 +35,6 @@ Usuario.init({
         allowNull: false,
         unique: true,
         validate: {
-            isEmail: {
-                args: true,
-                msg: "El campo tiene que ser un correo valido"
-            },
             notNull: {
                 msg: "El campo no puede ser nulo"
             }
