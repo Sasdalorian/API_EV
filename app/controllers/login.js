@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
     // Si se encuentra el Usuario se comparara la contraseña ingresada por el Usuario con la contraseña encriptada en la DataBase
     if (bcrypt.compareSync(pass, usuario.pass)) {
       // Si logra ingresarse correctamente, se crea un Token para el id y email con un secreto de JWT
-      const newToken = jwt.sign({ id: usuario.id, email: usuario.email }, process.env.JWT_SECRETO, {
+      const newToken = jwt.sign({ id: usuario.id, email: usuario.email, idrol: usuario.idrol }, process.env.JWT_SECRETO, {
         expiresIn: process.env.JWT_TIEMPO_EXPIRA,
       });
       res.json({ token: newToken });
@@ -35,7 +35,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// crear el middleware de autenticación
+// crear el middleware de autenticación Admin
 export const authMiddleware = async (req, res, next) => {
   // Obtener token de autenticación del encabezado
   const authHeader = req.headers.authorization;
@@ -45,11 +45,13 @@ export const authMiddleware = async (req, res, next) => {
   if (!token) {
     return res.status(401).json({ message: 'No se proporcionó un token de autenticación' });
   }
-
   try {
     // Verificar token utilizando la clave secreta
     const decoded = jwt.verify(token, process.env.JWT_SECRETO);
-    req.user = decoded;
+    console.log(decoded.idrol)
+    if (decoded.idrol !== 1) {
+      return res.status(403).json({ message: 'No tienes permisos para acceder a esta ruta' });
+    }
     next();
   } catch (error) {
     // Si el token no es válido, enviar error de "No autorizado"
@@ -57,6 +59,33 @@ export const authMiddleware = async (req, res, next) => {
   }
 }
 
+// crear middleware para Anfitrion
+export const anfitrionMiddleware = async (req, res, next) => {
+  try {
+    const decoded = req.user;
+    if (decoded.idrol !== [1, 3]) {
+      return res.status(403).json({ message: 'No tienes permisos para acceder a esta ruta' });
+    }
+    next();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'Ha ocurrido un error al intentar acceder a esta ruta.' });
+  }
+};
+
+// crear middleware para Usuarios
+export const voluntarioMiddleware = async (req, res, next) => {
+  try {
+    const decoded = req.user;
+    if (decoded.idrol !== [1, 2]) {
+      return res.status(403).json({ message: 'No tienes permisos para acceder a esta ruta' });
+    }
+    next();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'Ha ocurrido un error al intentar acceder a esta ruta.' });
+  }
+};
 
 //CerrarSesion
 export const logoutUser = async (req, res) => {

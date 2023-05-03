@@ -25,7 +25,7 @@ router.get("/token/:token", async (req, res) => {
 
 //TRAE VOLUNTARIADOS PARA MOSTRARLOS EN LA TABLA
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
-router.get("/api/v1/Admvoluntariados", authMiddleware, mostrarVoluntariados);
+router.get("/api/v1/Admvoluntariados", mostrarVoluntariados);
 
 //TRAE LOS USUARIOS Y LOS MUESTRA
 router.get("/api/v1/usuarios", mostrarUsuarios);
