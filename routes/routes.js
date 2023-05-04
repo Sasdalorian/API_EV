@@ -10,6 +10,7 @@ import { mostrarVoluntariados } from "../utils/voluntariados.js";
 
 // Prueba
 import { mostrarPerfil } from "../utils/perfil.js";
+import { editarVolunt } from "../utils/edit.js";
 
 const router = Router();
 
@@ -33,6 +34,8 @@ router.get("/api/v1/Admvoluntariados", mostrarVoluntariados);
 router.get("/api/v1/usuarios", mostrarUsuarios);
 // TABLA ADMIN
 router.get("/api/v1/admin", mostrarAdmins);
+// ----- PUT TABLAS ----- //
+router.put("/api/v1/editvolunt/:id", editarVolunt);
 
 // ----- DELETE TABLAS ----- //
 // ELIMINAR VOLUNTARIADO

@@ -13,7 +13,7 @@ export const nuevoVoluntario = async (req, res) => {
     agregarUsuario(nombre, apellidos, email, passE, idRol);
     res.json(resultado);
   } catch (error) {
-    return res.status(500).json(error);
+      return res.status(500).json(error);
   }
 }
 // AGREGAR Anfitrion
@@ -28,6 +28,6 @@ export const nuevoAnfitrion = async (req, res) => {
     agregarUsuario(nombre, apellidos, email, passE, idRol)
     res.json(resultado);
   } catch (error) {
-    return res.status(500).json({message: error.message});
+      return res.status(500).json({message: error.message});
   }
 }

@@ -60,7 +60,32 @@ export async function agregarVoluntariado(titulo, ubicacion, duracion, quehacer,
         console.error("No se ha podido agregar el voluntariado.", err)
     }
 }
-
+// EDITAR VOLUNTARIADO
+export async function editarVoluntariado(id, titulo, ubicacion, duracion, quehacer, beneficio, cantidad, img, areas) {
+    try {
+        const voluntariado = await Voluntariados.findByPk(id);
+        await voluntariado.update({
+            titulo,
+            ubicacion,
+            duracion,
+            quehacer,
+            beneficio,
+            cantidad,
+            img
+        });
+        await voluntariado.removeAreas(await voluntariado.getAreas());
+        const promises = areas.map(async element => {
+            const area = await Areas.findByPk(element);
+            await voluntariado.addArea(area, { through: { selfGranted: false } });
+        });
+        await Promise.all(promises);
+        console.log("Se ha actualizado el Voluntariado.");
+        return true;
+        } catch (err) {
+        console.error("No se ha podido actualizar el voluntariado.", err);
+        return false;
+    }
+}
 // AGREGAR ROLES
 export async function agregarRol(nombre) {
     try {

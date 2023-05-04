@@ -17,8 +17,6 @@ export async function mostrarUsuarios(req, res) {
     }
 };
 
-//FILTRAR VOLUNTARIADOS POR AREA
-
 // MOSTRAR ADMINS
 export async function mostrarAdmins(req, res) {
     try {
