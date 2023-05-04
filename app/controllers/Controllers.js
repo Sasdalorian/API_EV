@@ -5,22 +5,6 @@ import { Voluntariados } from "../models/Voluntariados.js";
 import { Rol } from "../models/Rol.js";
 import { Usuario } from "../models/Usuario.js";
 
-
-// AGREGAR ROLES
-export async function agregarRol(nombre) {
-    try {
-        
-        const rol = await Rol.create({
-            clase: nombre
-        });
-        console.log(`Se ha agregado el Rol ${nombre}.`);
-        return true;
-    } catch (err) {
-        console.error("No se pudo agregar el nivel del rol.", err);
-        return false;
-    };
-};
-
 // AGREGAR USUARIO
 export async function agregarUsuario(nombre, apellidos, email, pass, idrol) {
     try {
@@ -76,3 +60,18 @@ export async function agregarVoluntariado(titulo, ubicacion, duracion, quehacer,
         console.error("No se ha podido agregar el voluntariado.", err)
     }
 }
+
+// AGREGAR ROLES
+export async function agregarRol(nombre) {
+    try {
+        
+        const rol = await Rol.create({
+            clase: nombre
+        });
+        console.log(`Se ha agregado el Rol ${nombre}.`);
+        return true;
+    } catch (err) {
+        console.error("No se pudo agregar el nivel del rol.", err);
+        return false;
+    };
+};

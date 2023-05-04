@@ -13,15 +13,3 @@ export const sequelize = new Sequelize (
         dialect:'postgres'
     }
 );
-
-export function validateToken(token) {
-    return new Promise((resolve, reject) => {
-      jwt.verify(token, process.env.JWT_SECRETO, (err, data) => {
-        if (err) {
-          resolve({ estado: false, msg: "Token inválido" });
-        } else {
-          resolve({ estado: true, msg: "Token válido" });
-        }
-      });
-    });
-  }

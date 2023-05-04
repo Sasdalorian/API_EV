@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
     // Si se encuentra el Usuario se comparara la contraseña ingresada por el Usuario con la contraseña encriptada en la DataBase
     if (bcrypt.compareSync(pass, usuario.pass)) {
       // Si logra ingresarse correctamente, se crea un Token para el id y email con un secreto de JWT
-      const newToken = jwt.sign({ id: usuario.id, email: usuario.email, idrol: usuario.idrol }, process.env.JWT_SECRETO, {
+      const newToken = jwt.sign({ id: usuario.id_usuario, email: usuario.email, idrol: usuario.idrol }, process.env.JWT_SECRETO, {
         expiresIn: process.env.JWT_TIEMPO_EXPIRA,
       });
       res.json({ token: newToken });
@@ -40,30 +40,27 @@ export const authMiddleware = async (req, res, next) => {
   // Obtener token de autenticación del encabezado
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
+  // Si no se proporciona un token, enviar error de "No autorizado"
+  if (!token) {
+    return res.status(401).json({ message: 'No se proporcionó un token de autenticación' });
+  }
+  next();
+};
 
+// crear middleware para Anfitrion
+export const anfitrionMiddleware = async (req, res, next) => {
+  // Obtener token de autenticación del encabezado
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+  
   // Si no se proporciona un token, enviar error de "No autorizado"
   if (!token) {
     return res.status(401).json({ message: 'No se proporcionó un token de autenticación' });
   }
   try {
-    // Verificar token utilizando la clave secreta
     const decoded = jwt.verify(token, process.env.JWT_SECRETO);
-    console.log(decoded.idrol)
-    if (decoded.idrol !== 1) {
-      return res.status(403).json({ message: 'No tienes permisos para acceder a esta ruta' });
-    }
-    next();
-  } catch (error) {
-    // Si el token no es válido, enviar error de "No autorizado"
-    res.status(401).json({ message: 'Token inválido' });
-  }
-}
-
-// crear middleware para Anfitrion
-export const anfitrionMiddleware = async (req, res, next) => {
-  try {
-    const decoded = req.user;
-    if (decoded.idrol !== [1, 3]) {
+    console.log(decoded);
+    if (decoded.idrol !== 3) {
       return res.status(403).json({ message: 'No tienes permisos para acceder a esta ruta' });
     }
     next();
@@ -73,11 +70,42 @@ export const anfitrionMiddleware = async (req, res, next) => {
   }
 };
 
-// crear middleware para Usuarios
+// crear middleware para voluntarios
 export const voluntarioMiddleware = async (req, res, next) => {
+  // Obtener token de autenticación del encabezado
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+  
+  // Si no se proporciona un token, enviar error de "No autorizado"
+  if (!token) {
+    return res.status(401).json({ message: 'No se proporcionó un token de autenticación' });
+  }
   try {
-    const decoded = req.user;
-    if (decoded.idrol !== [1, 2]) {
+    const decoded = jwt.verify(token, process.env.JWT_SECRETO);
+    console.log(decoded);
+    if (decoded.idrol !== 2) {
+      return res.status(403).json({ message: 'No tienes permisos para acceder a esta ruta' });
+    }
+    next();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: 'Ha ocurrido un error al intentar acceder a esta ruta.' });
+  }
+};
+
+// crear middleware para voluntarios
+export const adminMiddleware = async (req, res, next) => {
+  // Obtener token de autenticación del encabezado
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+  
+  // Si no se proporciona un token, enviar error de "No autorizado"
+  if (!token) {
+    return res.status(401).json({ message: 'No se proporcionó un token de autenticación' });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRETO);
+    if (decoded.idrol !== 1) {
       return res.status(403).json({ message: 'No tienes permisos para acceder a esta ruta' });
     }
     next();
@@ -90,7 +118,8 @@ export const voluntarioMiddleware = async (req, res, next) => {
 //CerrarSesion
 export const logoutUser = async (req, res) => {
   try {
-    res.json({ token: null }); // Envía una respuesta con el token de autenticación a null para borrarlo
+    // Envía una respuesta con el token de autenticación a null para borrarlo
+    res.json({ token: null });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: 'Ha ocurrido un error al intentar cerrar sesión. Por favor, inténtelo de nuevo más tarde.' });
