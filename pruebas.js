@@ -1,5 +1,5 @@
 import { syncTables } from "./index.js";
-import { agregarArea, agregarRol, agregarVoluntariado, agregarUsuario} from "./app/controllers/Controllers.js"
+import { agregarUsuario, agregarRol, agregarVoluntariado, agregarArea } from "./app/controllers/addControllers.js";
 
 await syncTables();
 await agregarRol("Admin");

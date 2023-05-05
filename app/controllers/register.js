@@ -1,5 +1,5 @@
 // CONTROLADORES
-import { agregarUsuario } from "./Controllers.js";
+import { agregarUsuario } from "./addControllers.js";
 
 // AGREGAR VOLUNTARIADO
 export const nuevoVoluntario = async (req, res) => {
