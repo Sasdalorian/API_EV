@@ -48,6 +48,14 @@ Usuario.init({
                 msg: "El campo no puede ser nulo"
             }
         }
+    },
+    img: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    },
+    descripcion: {
+        type: DataTypes.STRING(255),
+        allowNull: true
     }
 },
 {
