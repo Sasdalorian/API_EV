@@ -6,14 +6,19 @@ import { Rol } from "../models/Rol.js";
 import { Usuario } from "../models/Usuario.js";
 
 // AGREGAR USUARIO
-export async function agregarUsuario(nombre, apellidos, email, pass, idrol) {
+export async function agregarUsuario(nombre, apellidos, email, pass, idrol, img) {
     try {
+        let imagenPorDefecto = './img/imgUser/imagenAlternativa.png';
+        if (!img) {
+            img = imagenPorDefecto;
+        }
         const usuario = await Usuario.create({
             nombre: nombre,
             apellidos: apellidos,
             email: email,
             pass: pass,
-            idrol: idrol
+            idrol: idrol,
+            img: img
         })
         console.log(`Se ha agregado el Usuario ${nombre}.`);
         return true;

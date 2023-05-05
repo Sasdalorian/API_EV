@@ -21,8 +21,6 @@ router.get("/api/v1/voluntariados", mostrarVoluntariados);
 
 
 // ------------- USUARIOS ------------- //
-// Ruta protegida por autenticación
-router.get('/protegida', authMiddleware);
 // INFO PERFIL
 router.get("/api/v1/perfil", mostrarPerfil);
 

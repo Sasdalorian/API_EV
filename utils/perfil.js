@@ -13,14 +13,16 @@ export async function mostrarPerfil(req, res) {
         return res.status(401).json({ message: 'No se proporcionó un token de autenticación' });
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRETO);
-    console.log(decoded);
     try {
         const resultado = await Usuario.findOne({
+            where: {id_usuario: decoded.id},
             include: {
                 model: Rol,
-                attributes: ["clase"],
-            attributes: ["nombre", "apellidos", "email", "idrol"]}
-        }).then(resultado => res.json(resultado));
+                attributes: ["clase"]},
+            attributes: ["nombre", "apellidos", "email", "idrol", "pass", "img"]
+        })
+        console.log(resultado); // Agregar este console.log para verificar la respuesta
+        return res.json(resultado);
     } catch (error) {
         console.log(error)
     }
