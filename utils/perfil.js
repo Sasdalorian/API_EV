@@ -19,7 +19,7 @@ export async function mostrarPerfil(req, res) {
             include: {
                 model: Rol,
                 attributes: ["clase"]},
-            attributes: ["nombre", "apellidos", "email", "idrol", "pass", "img"]
+            attributes: ["nombre", "apellidos", "email", "idrol", "pass", "img", "descripcion"]
         })
         console.log(resultado); // Agregar este console.log para verificar la respuesta
         return res.json(resultado);

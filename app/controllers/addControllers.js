@@ -4,7 +4,7 @@ import { Rol } from "../models/Rol.js";
 import { Usuario } from "../models/Usuario.js";
 
 // Agregar Voluntariado
-export async function agregarVoluntariado(titulo, ubicacion, duracion, quehacer, beneficio, cantidad, img, areas, descripcion) {
+export async function agregarVoluntariado(titulo, ubicacion, duracion, quehacer, beneficio, cantidad, img, areas) {
     try {
         const voluntariado = await Voluntariados.create({
             titulo,
@@ -13,8 +13,7 @@ export async function agregarVoluntariado(titulo, ubicacion, duracion, quehacer,
             quehacer,
             beneficio,
             cantidad,
-            img,
-            descripcion
+            img
         });
         const promises = areas.map(async element => {
             const area = await Areas.findByPk(element);
@@ -28,7 +27,7 @@ export async function agregarVoluntariado(titulo, ubicacion, duracion, quehacer,
     }
 }
 //Agregar Usuario
-export async function agregarUsuario(nombre, apellidos, email, pass, idrol, img) {
+export async function agregarUsuario(nombre, apellidos, email, pass, idrol, img, descripcion) {
     try {
         let imagenPorDefecto = './img/imgUser/imagenAlternativa.png';
         if (!img) {
@@ -40,7 +39,8 @@ export async function agregarUsuario(nombre, apellidos, email, pass, idrol, img)
             email: email,
             pass: pass,
             idrol: idrol,
-            img: img
+            img: img,
+            descripcion: descripcion
         })
         console.log(`Se ha agregado el Usuario ${nombre}.`);
         return true;
@@ -67,7 +67,6 @@ export async function agregarArea(nombre) {
 // AGREGAR ROLES
 export async function agregarRol(nombre) {
     try {
-        
         const rol = await Rol.create({
             clase: nombre
         });
