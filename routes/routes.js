@@ -10,16 +10,10 @@ import { mostrarVoluntariados } from "../utils/voluntariados.js";
 
 // Prueba
 import { mostrarPerfil } from "../utils/perfil.js";
-import { nuevoVoluntariado } from "../utils/post.js";
+import { nuevoAdmin, nuevoUsuario, nuevoVoluntariado } from "../utils/post.js";
 import { editarVolunt } from "../utils/put.js";
 
 const router = Router();
-
-
-// ----- ADD TABLAS ----- //
-router.post("/api/v1/addvolunt", nuevoVoluntariado);
-// ----- PUT TABLAS ----- //
-router.put("/api/v1/editvolunt", editarVolunt);
 
 // ------------- VOLUNTARIADOS ------------- //
 // TRAE VOLUNTARIADOS PARA MOSTRARLOS EN LA TABLA
@@ -39,8 +33,15 @@ router.get("/api/v1/usuarios", mostrarUsuarios);
 // TABLA ADMIN
 router.get("/api/v1/admin", mostrarAdmins);
 
-
-
+// ----- ADD TABLAS ----- //
+// AGREGAR VOLUNTARIADO
+router.post("/api/v1/addvolunt", nuevoVoluntariado);
+// AGREGAR USUARIO
+router.post("/api/v1/addusuario", nuevoUsuario);
+// AGREGAR ADMIN
+router.post("/api/v1/addadmin", nuevoAdmin);
+// ----- PUT TABLAS ----- //
+router.put("/api/v1/editvolunt", editarVolunt);
 
 // ----- DELETE TABLAS ----- //
 // ELIMINAR VOLUNTARIADO
