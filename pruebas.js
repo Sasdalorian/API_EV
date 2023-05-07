@@ -6,9 +6,9 @@ await agregarRol("Admin");
 await agregarRol("Voluntario");
 await agregarRol("Anfitrion");
 
-await agregarUsuario("Sas", "MahFoo", "esteban.nicolas.sd@gmail.com", "$2b$10$/DeBSdsZOBmtVj/4NQXCpuuNhCpyevGfeKH/LK4OQ6wjRfjiahEeC", 1, "./img/imgUser/krauser.jfif", "SISOY YOOOO");
-await agregarUsuario("Bryan", "Contreras", "bryan.contreras@gmail.com", "$2b$10$/DeBSdsZOBmtVj/4NQXCpuuNhCpyevGfeKH/LK4OQ6wjRfjiahEeC", 2);
-await agregarUsuario("Ignacio", "Wallace", "ignacio.wallace@gmail.com", "$2b$10$/DeBSdsZOBmtVj/4NQXCpuuNhCpyevGfeKH/LK4OQ6wjRfjiahEeC", 3);
+await agregarUsuario("Admin", "Uno", "admin@gmail.com", "$2b$10$/DeBSdsZOBmtVj/4NQXCpuuNhCpyevGfeKH/LK4OQ6wjRfjiahEeC", 1, "./img/imgUser/krauser.jfif", "Hola! soy una descripcion de prueba");
+await agregarUsuario("Voluntario", "Dos", "voluntario@gmail.com", "$2b$10$/DeBSdsZOBmtVj/4NQXCpuuNhCpyevGfeKH/LK4OQ6wjRfjiahEeC", 2);
+await agregarUsuario("Anfitrion", "Tres", "anfitrion@gmail.com", "$2b$10$/DeBSdsZOBmtVj/4NQXCpuuNhCpyevGfeKH/LK4OQ6wjRfjiahEeC", 3);
 
 await agregarArea("Niños");
 await agregarArea("Emergencias");

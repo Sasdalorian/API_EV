@@ -18,6 +18,7 @@ export const nuevoVoluntariado = async (req, res) => {
 // CREAR NUEVO USUARIO
 export const nuevoUsuario = async (req, res) => {
     try {
+        console.log(req.body)
         // Rescatamos los parametros del body
         const {nombre, apellidos, email, passE, idrol, img, descripcion} = req.body;
         console.log(nombre, apellidos, email, passE, idrol, img, descripcion);
@@ -36,8 +37,7 @@ export const nuevoAdmin = async (req, res) => {
         const {nombre, apellidos, email, passE, img, descripcion} = req.body;
         const idrol = 1
         console.log(nombre, apellidos, email, passE, idrol, img, descripcion);
-
-        agregarUsuario(nombre, apellidos, email, passE, idrol, img, descripcion);
+        const resultado = agregarUsuario(nombre, apellidos, email, passE, idrol, img, descripcion);
         res.json(resultado);
     } catch (error) {
         return res.status(500).json(error);

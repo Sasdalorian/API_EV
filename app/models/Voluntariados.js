@@ -57,5 +57,7 @@ Voluntariados.init({
 Voluntariados.belongsToMany(Areas, {through: "Areavolunt"});
 Areas.belongsToMany(Voluntariados, {through: "Areavolunt"});
 
-Voluntariados.belongsToMany(Usuario, {through: "Uservolunt"});
-Usuario.belongsToMany(Voluntariados, {through: "Uservolunt"});
+// Muchos a uno, N a 1
+Voluntariados.hasMany(Usuario, {foreignKey: "Uservolunt"});
+// Uno a Muchos, 1 a N
+Usuario.belongsTo(Voluntariados, {foreignKey: "Uservolunt"});   
