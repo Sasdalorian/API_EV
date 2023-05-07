@@ -1,5 +1,6 @@
 import { Voluntariados } from "../models/Voluntariados.js";
 import { Areas } from "../models/Areas.js";
+import { Usuario } from "../models/Usuario.js";
 
 // EDITAR VOLUNTARIADO
 export async function editarVoluntariado(idvoluntariado, titulo, ubicacion, duracion, quehacer, beneficio, cantidad, img, areas, descripcion) {
@@ -35,5 +36,29 @@ export async function editarVoluntariado(idvoluntariado, titulo, ubicacion, dura
         return true;
     } catch (err) {
         console.error(`No se ha podido modificar el voluntariado con ID ${idvoluntariado}.`, err)
+    }
+}
+
+export async function editarUsuario(idusuario, nombre, apellidos, email, pass, idrol, img, descripcion) {
+    try {
+        const usuario = await Usuario.findByPk(idusuario);
+        if (!usuario) {
+            console.error(`No se encontró el usuario con ID ${idusuario}`);
+            return false;
+        }
+
+        // Actualizamos los datos del Usuario
+        usuario.nombre = nombre;
+        usuario.apellidos = apellidos;
+        usuario.email = email;
+        usuario.pass = pass;
+        usuario.img = img;
+        usuario.descripcion = descripcion;
+        usuario.idrol = idrol;
+        await usuario.save();
+
+        console.log(`Se ha modificado el Usuario con ID ${idusuario}.`);
+    } catch (error) {
+        console.error(`No se ha podido modificar el Usuario con ID aquiponerid.`, error)
     }
 }

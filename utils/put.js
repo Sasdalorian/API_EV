@@ -1,16 +1,24 @@
-import { editarVoluntariado } from "../app/controllers/editControllers.js";
+import { editarUsuario, editarVoluntariado } from "../app/controllers/editControllers.js";
 
 
 export const editarVolunt = async (req, res) => {
-    try {
-    // Rescatamos los parametros del body
-    const {id, titulo, ubicacion, duracion, quehacer, beneficio, cantidad, img, areas} = req.body;
-    // Designamos el idRol de Voluntariado
-    console.log(id, titulo, ubicacion, duracion, quehacer, beneficio, cantidad, img, areas);
-    // Si no existe, se creara e ingresara en la tabla Usuario
-    editarVoluntariado(id, titulo, ubicacion, duracion, quehacer, beneficio, cantidad, img, areas.split(',').map(Number));
+  try {
+    const { id, tituloE, ubicacionE, duracionE, quehacerE, beneficioE, cantidadE, img, areasE } = req.body;
+    editarVoluntariado(id, tituloE, ubicacionE, duracionE, quehacerE, beneficioE, cantidadE, img, areasE.split(',').map(Number));
+
     res.json(resultado);
   } catch (error) {
-      return res.status(500).json(error);
+    return res.status(500).json(error);
+  }
+}
+
+export const editUser = async (req, res) => {
+  try {
+    const { id, nombreE, apellidosE, emailE, passE, idrolE, img, descripcionE } = req.body;
+    editarUsuario(id, nombreE, apellidosE, emailE, passE, idrolE, img, descripcionE);
+
+    res.json(resultado);
+  } catch (error) {
+    return res.status(500).json(error);
   }
 }

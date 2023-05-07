@@ -11,7 +11,7 @@ import { mostrarVoluntariados } from "../utils/voluntariados.js";
 // Prueba
 import { mostrarPerfil } from "../utils/perfil.js";
 import { nuevoAdmin, nuevoUsuario, nuevoVoluntariado } from "../utils/post.js";
-import { editarVolunt } from "../utils/put.js";
+import { editUser, editarVolunt } from "../utils/put.js";
 
 const router = Router();
 
@@ -40,8 +40,12 @@ router.post("/api/v1/addvolunt", nuevoVoluntariado);
 router.post("/api/v1/addusuario", nuevoUsuario);
 // AGREGAR ADMIN
 router.post("/api/v1/addadmin", nuevoAdmin);
+
 // ----- PUT TABLAS ----- //
+// EDITAR VOLUNTARIADO
 router.put("/api/v1/editvolunt", editarVolunt);
+// EDITAR USUARIOS
+router.put("/api/v1/editusuario", editUser);
 
 // ----- DELETE TABLAS ----- //
 // ELIMINAR VOLUNTARIADO
