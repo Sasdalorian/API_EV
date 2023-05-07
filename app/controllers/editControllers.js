@@ -59,6 +59,31 @@ export async function editarUsuario(idusuario, nombre, apellidos, email, pass, i
 
         console.log(`Se ha modificado el Usuario con ID ${idusuario}.`);
     } catch (error) {
-        console.error(`No se ha podido modificar el Usuario con ID aquiponerid.`, error)
+        console.error(`No se ha podido modificar el Usuario con ID ${idusuario}.`, error)
+    }
+}
+
+export async function editarAdmin(idusuario, nombre, apellidos, email, pass, img, descripcion) {
+    try {
+        const usuario = await Usuario.findByPk(idusuario);
+        if (!usuario) {
+            console.error(`No se encontró el usuario con ID ${idusuario}`);
+            return false;
+        }
+        const idrol = 1;
+
+        // Actualizamos los datos del Usuario
+        usuario.nombre = nombre;
+        usuario.apellidos = apellidos;
+        usuario.email = email;
+        usuario.pass = pass;
+        usuario.img = img;
+        usuario.descripcion = descripcion;
+        usuario.idrol = idrol;
+        await usuario.save();
+
+        console.log(`Se ha modificado el Usuario con ID ${idusuario}.`);
+    } catch (error) {
+        console.error(`No se ha podido modificar el Usuario con ID ${idusuario}.`, error)
     }
 }

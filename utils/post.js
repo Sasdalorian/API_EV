@@ -38,7 +38,7 @@ export const nuevoAdmin = async (req, res) => {
         console.log(nombre, apellidos, email, passE, idrol, img, descripcion);
 
         agregarUsuario(nombre, apellidos, email, passE, idrol, img, descripcion);
-
+        res.json(resultado);
     } catch (error) {
         return res.status(500).json(error);
     }

@@ -3,29 +3,28 @@ import { Router } from "express";
 // Controllers
 import { nuevoAnfitrion, nuevoVoluntario } from "../app/controllers/register.js";
 import { loginUser, logoutUser } from "../app/controllers/login.js"
-import { mostrarAdmins, mostrarUsuarios } from "../utils/funciones.js";
+import { mostrarAdmins, mostrarUsuarios, mostrarVoluntariados } from "../utils/funciones.js";
 import { topAreas, topAreasAsc, topAreasDesc } from "../utils/topAreas.js";
 import { deleteAdmin, deleteUsuario, deleteVolunt } from "../utils/delete.js";
-import { mostrarVoluntariados } from "../utils/voluntariados.js";
 
 // Prueba
 import { mostrarPerfil } from "../utils/perfil.js";
 import { nuevoAdmin, nuevoUsuario, nuevoVoluntariado } from "../utils/post.js";
-import { editUser, editarVolunt } from "../utils/put.js";
+import { editAdmin, editUser, editarVolunt } from "../utils/put.js";
 
 const router = Router();
 
-// ------------- VOLUNTARIADOS ------------- //
+// -------------------- VOLUNTARIADOS -------------------- //
 // TRAE VOLUNTARIADOS PARA MOSTRARLOS EN LA TABLA
 router.get("/api/v1/voluntariados", mostrarVoluntariados);
 
 
-// ------------- USUARIOS ------------- //
+// -------------------- PERFIL -------------------- //
 // INFO PERFIL
 router.get("/api/v1/perfil", mostrarPerfil);
 
 
-// ------------- ADMIN ------------- //
+// -------------------- ADMIN -------------------- //
 // TABLA VOLUNTARIOS
 router.get("/api/v1/Admvoluntariados", mostrarVoluntariados);
 // TABLA USUARIOS
@@ -46,6 +45,8 @@ router.post("/api/v1/addadmin", nuevoAdmin);
 router.put("/api/v1/editvolunt", editarVolunt);
 // EDITAR USUARIOS
 router.put("/api/v1/editusuario", editUser);
+// EDITAR ADMIN
+router.put("/api/v1/editadmin", editAdmin);
 
 // ----- DELETE TABLAS ----- //
 // ELIMINAR VOLUNTARIADO
@@ -64,14 +65,14 @@ router.get("/api/v1/top/topAreasDesc", topAreasDesc);
 router.get("/api/v1/top/topAreasAsc", topAreasAsc);
 
 
-// ------------- REGISTRAR ------------- //
+// -------------------- REGISTRAR -------------------- //
 // REGISTRAR VOLUNTARIADO
 router.post("/api/v1/registerVoluntario", nuevoVoluntario);
 // REGISTRAR ANFITRION
 router.post("/api/v1/registerAnfitrion", nuevoAnfitrion);
 
 
-// ------------- LOGIN & LOGOUT ------------- //
+// -------------------- LOGIN & LOGOUT -------------------- //
 // INICIAR SESION
 router.post("/api/v1/iniciarSesion", loginUser);
 // CERRAR SESION
