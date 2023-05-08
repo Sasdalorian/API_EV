@@ -4,7 +4,7 @@ import { Router } from "express";
 import { nuevoAnfitrion, nuevoVoluntario } from "../app/controllers/register.js";
 import { loginUser, logoutUser } from "../app/controllers/login.js"
 import { mostrarAdmins, mostrarUsuarios, mostrarVoluntariados } from "../utils/funciones.js";
-import { topAreas, topAreasAsc, topAreasDesc } from "../utils/topAreas.js";
+import { controladorEstadisticas, topAreas, topAreasAsc, topAreasDesc } from "../utils/estadisticas.js";
 import { deleteAdmin, deleteUsuario, deleteVolunt } from "../utils/delete.js";
 
 // Prueba
@@ -57,12 +57,27 @@ router.delete("/api/v1/deleteusuario/:id", deleteUsuario);
 router.delete("/api/v1/deleteadmin/:id", deleteAdmin);
 
 // ----- ESTADISTICAS ----- //
-// TopAreas
-router.get("/api/v1/topAreas", topAreas);
+router.get("/api/v1/estadisticas", controladorEstadisticas);
+
 // TopAreasDesc
-router.get("/api/v1/top/topAreasDesc", topAreasDesc);
-// TopAreasAsc
-router.get("/api/v1/top/topAreasAsc", topAreasAsc);
+router.get('/api/v1/estadisticas/desc', async (req, res) => {
+    try {
+        const resultado = await topAreasDesc();
+        res.json(resultado);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Ruta para obtener la tabla ordenada de forma ascendente
+router.get('/api/v1/estadisticas/asc', async (req, res) => {
+    try {
+        const resultado = await topAreasAsc();
+        res.json(resultado);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 
 // -------------------- REGISTRAR -------------------- //
