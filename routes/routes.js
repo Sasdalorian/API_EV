@@ -4,7 +4,7 @@ import { Router } from "express";
 import { nuevoAnfitrion, nuevoVoluntario } from "../app/controllers/register.js";
 import { loginUser, logoutUser } from "../app/controllers/login.js"
 import { mostrarAdmins, mostrarUsuarios, mostrarVoluntariados } from "../utils/funciones.js";
-import { controladorEstadisticas, topAreas, topAreasAsc, topAreasDesc } from "../utils/estadisticas.js";
+import { controladorEstadisticas, topAreasAsc, topAreasDesc } from "../utils/estadisticas.js";
 import { deleteAdmin, deleteUsuario, deleteVolunt } from "../utils/delete.js";
 
 // Prueba
