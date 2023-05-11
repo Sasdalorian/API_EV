@@ -41,9 +41,14 @@
 
 > Después de ejecutar node pruebas.js se ingresaran tres usuarios predeterminados con los siguientes datos.
 ``` 
-    Email: admin@gmail.com - Pass: 1234       -> Muestra la vista de admin y los accesos del mismo.
-    Email: voluntario@gmail.com - Pass: 1234  -> Muestra la vista de voluntario y su respectiva tabla para unirse.
-    Email: anfitrion@gmail.com - Pass: 1234   -> Muestra la vista de anfitrion y su respectiva tabla para crear voluntariados.
+    -Admin -> Muestra la vista de admin y los accesos del mismo.
+    Email: admin@gmail.com - Pass: 1234 
+    
+    -Voluntario -> Muestra la vista de voluntario y su respectiva tabla para unirse.
+    Email: voluntario@gmail.com - Pass: 1234
+    
+    -Anfitrion -> Muestra la vista de anfitrion y su respectiva tabla para crear voluntariados.
+    Email: anfitrion@gmail.com - Pass: 1234
 ```
 
 ## Rúbrica
